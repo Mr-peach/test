@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取用户列表 API</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../../index.html" class="back-link">返回主页</a>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <!-- 左侧API文档区域 -->
+        <div class="api-docs">
+            <div class="api-card get">
+                <div class="method">POST</div>
+                <h3 class="endpoint">/api/handleFD</h3>
+                <p class="description">批量FD处理</p>
+            </div>
+            
+            <div class="api-details">
+                <h3>API 说明</h3>
+                <p>此API用于从一个标准的环境导出FD，然后导入到其余单位</p>
+                
+                <h4>请求参数</h4>
+                <div class="params-table">
+                    <div class="param-row">
+                        <span class="param-name">source_project_code</span>
+                        <span class="param-type">String</span>
+                        <span class="param-desc">源项目Code</span>
+                    </div>
+                    <div class="param-row">
+                        <span class="param-name">target_project_codes</span>
+                        <span class="param-type">List</String></span>
+                        <span class="param-desc">目标单位</span>
+                    </div>
+                    <div class="param-row">
+                        <span class="param-name">fd_codes</span>
+                        <span class="param-type">List</String></span>
+                        <span class="param-desc">需要操作的FDCodes</span>
+                    </div>
+                    <div class="param-row">
+                        <span class="param-name">fd_target_database</span>
+                        <span class="param-type">String</String></span>
+                        <span class="param-desc">fd所属目标数据库</span>
+                    </div>
+                </div>
+
+                <h4>请求示例</h4>
+                <pre class="response-example">
+{
+   "source_project_code":"deyang",
+   "target_project_codes":["deyang","yizhou"],
+   "fd_codes":["test_code1","test_code2"],
+   "fd_target_database":"criminal_business"
+}
+                </pre>
+            </div>
+        </div>
+
+        <!-- 右侧交互区域 -->
+        <div class="interaction-panel">
+            <h3>请求参数设置</h3>
+            <div class="form-group">
+                <label for="source_project_code">源项目Code：</label>
+                <input type="text" id="source_project_code">
+            </div>
+            <div class="form-group">
+                <label>目标单位：</label>
+                <div class="select-container">
+                    <div class="custom-select" id="customSelect">请选择</div>
+                    <div class="dropdown-options" id="dropdownOptions">
+                        <div class="all-select" id="selectAll">全选</div>
+                        <div class="option-item" data-value="yizhou">邑州</div>
+                        <div class="option-item" data-value="jintang">金堂</div>
+                        <div class="option-item" data-value="shengnv">省女</div>
+                        <div class="option-item" data-value="deyang">德阳</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fd_codes">fdCodes：(多个用逗号隔开)</label>
+                <input type="text" id="fd_codes">
+            </div>
+            <div class="form-group">
+                <label for="fd_target_database">fd所属数据库：</label>
+                <input type="text" id="fd_target_database">
+            </div>
+            <button id="sendRequest" class="send-btn">发送请求</button>
+
+            <div class="response-section">
+                <h3>响应结果</h3>
+                <pre id="responseData" class="response-display"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

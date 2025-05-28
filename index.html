@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Demo</title>
+    <link rel="stylesheet" href="styles/form.css">
+    <script src="vue.js"></script>
+    <script src="components/button.js"></script>
+    <script src="components/form.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <p>这是一个简单的Vue示例</p>
+        <input v-model="message" placeholder="修改文本">
+        <button-component></button-component>
+        <form-component></form-component>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: '欢迎使用Vue!'
+            },
+            components: {
+                'button-component': ButtonComponent,
+                'form-component': FormComponent
+            },
+            mounted() {
+                // 监听自定义事件来接收表单数据
+                this.$root.$on('form-submitted', (formData) => {
+                    console.log('收到的表单数据：', formData);
+                    console.log('姓名：', formData.name);
+                    console.log('邮箱：', formData.email);
+                    console.log('电话：', formData.phone);
+                    console.log('类别：', formData.category);
+                    console.log('留言：', formData.message);
+                });
+            }
+        })
+    </script>
+</body>
+</html>
